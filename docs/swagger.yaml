@@ -1,0 +1,400 @@
+basePath: /apis
+definitions:
+  models.Empty:
+    type: object
+  models.Fail:
+    properties:
+      code:
+        example: 500
+        type: integer
+      msg:
+        example: error
+        type: string
+    type: object
+  models.KubeNameSpace:
+    properties:
+      cluster:
+        example: hza
+        type: string
+      namespace:
+        example: example
+        type: string
+    type: object
+  models.Success:
+    properties:
+      code:
+        example: 200
+        type: integer
+      msg:
+        example: ok
+        type: string
+    type: object
+info:
+  contact: {}
+  description: A server for Oops api
+  title: Oops API
+  version: "1.0"
+paths:
+  /kubernetes/deployments:
+    get:
+      consumes:
+      - application/json
+      description: 列出 Deployment
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: 应用名
+        in: query
+        name: app
+        required: true
+        type: string
+      - description: 项目名
+        in: query
+        name: proj
+        required: true
+        type: string
+      - description: 环境名
+        in: query
+        name: env
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出 Deployment
+      tags:
+      - kubernetes
+  /kubernetes/deployments/{namespace}:
+    get:
+      consumes:
+      - application/json
+      description: 列出指定namespace的deployments
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出指定namespace的deployments
+      tags:
+      - kubernetes
+  /kubernetes/namespace:
+    post:
+      consumes:
+      - application/json
+      description: 创建namespace
+      parameters:
+      - description: namespace
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.KubeNameSpace'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 创建namespace
+      tags:
+      - kubernetes
+  /kubernetes/nodes:
+    get:
+      consumes:
+      - application/json
+      description: 列出 Nodes
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出 Nodes
+      tags:
+      - kubernetes
+  /kubernetes/pods:
+    get:
+      consumes:
+      - application/json
+      description: 列出 Pods
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: 应用名
+        in: query
+        name: app
+        required: true
+        type: string
+      - description: 项目名
+        in: query
+        name: proj
+        required: true
+        type: string
+      - description: 环境名
+        in: query
+        name: env
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出 Pods
+      tags:
+      - kubernetes
+  /kubernetes/pods/{namespace}:
+    get:
+      consumes:
+      - application/json
+      description: 列出指定namespace的pods
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出指定namespace的pods
+      tags:
+      - kubernetes
+  /kubernetes/services:
+    get:
+      consumes:
+      - application/json
+      description: 列出 Services
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: 应用名
+        in: query
+        name: app
+        required: true
+        type: string
+      - description: 项目名
+        in: query
+        name: proj
+        required: true
+        type: string
+      - description: 环境名
+        in: query
+        name: env
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出 Service
+      tags:
+      - kubernetes
+  /kubernetes/services/{namespace}:
+    get:
+      consumes:
+      - application/json
+      description: 列出指定namespace的services
+      parameters:
+      - description: 集群 ack or hza
+        in: query
+        name: cluster
+        required: true
+        type: string
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Empty'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Empty'
+      summary: 列出指定namespace的services
+      tags:
+      - kubernetes
+  /scripts/{script}:
+    get:
+      consumes:
+      - text/plain
+      description: 获取脚本
+      parameters:
+      - description: 脚本名
+        in: path
+        name: script
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: 获取脚本
+      tags:
+      - 脚本
+  /webhook/callvoice:
+    post:
+      consumes:
+      - application/json
+      description: alertmanager 打电话告警
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Fail'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: alertmanager aliyun语音服务webhook接口
+      tags:
+      - webhook
+  /webhook/dingding:
+    post:
+      consumes:
+      - application/json
+      description: 发送dingding机器人
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 模板
+        in: query
+        name: template
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Fail'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: alertmanager 钉钉机器人webhook
+      tags:
+      - webhook
+  /webhook/loki/callvoice:
+    post:
+      consumes:
+      - application/json
+      description: loki 打电话告警
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Fail'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: loki aliyun语音服务webhook接口
+      tags:
+      - webhook
+schemes:
+- http
+- https
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
